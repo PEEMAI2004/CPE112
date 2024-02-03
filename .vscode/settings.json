@@ -59,6 +59,7 @@
   "files.associations": {
     "typeinfo": "c",
     "stdlib.h": "c",
-    "stdio.h": "c"
+    "stdio.h": "c",
+    "Lab3_3.C": "cpp"
   }
 }
