@@ -80,8 +80,12 @@ void reverseList(ListNode **head)
 {
     int start, end;
     scanf("%d %d", &start, &end);
-    start--;
-    end--;
+    
+    // create a new dummy node to be the head of the list
+    ListNode *dummy = (struct ListNode *)malloc(sizeof(ListNode));
+    dummy->next = *head;
+    *head = dummy;
+
     // printf("start: %d, end: %d\n", start, end);
     ListNode *current = *head;
     ListNode *temp = NULL;
@@ -102,4 +106,8 @@ void reverseList(ListNode **head)
         temp->next = prev->next; // Update the next pointer of the previous node
         prev->next = temp;       // Update the next pointer of the previous node to the current node
     }
+
+    // remove the dummy node
+    *head = (*head)->next;
+    free(dummy);
 }
