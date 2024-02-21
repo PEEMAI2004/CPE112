@@ -1,3 +1,5 @@
+// Kamin Jittapassorn 66070503409
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -12,7 +14,7 @@ typedef struct Node
 
 void addSong(Node **head, Node **tail, char songName[], char artist[], int time);
 void deQueue(Node **head, Node **tail);
-void remainingTime(Node *head);
+void remainingTime(Node **head);
 
 int main()
 {
@@ -44,7 +46,7 @@ int main()
         }
         if (strcmp(command, "sum") == 0)
         {
-            remainingTime(head);
+            remainingTime(&head);
             break;
         }
     }
@@ -64,8 +66,12 @@ void addSong(Node **head, Node **tail, char songName[], char artist[], int time)
     }
     else
     {
-        (*tail)->next = newNode;
-        *tail = newNode;
+        Node *temp = *head;
+        while (temp->next != NULL)
+        {
+            temp = temp->next;
+        }
+        temp->next = newNode;
     }
 }
 
@@ -74,6 +80,7 @@ void deQueue(Node **head, Node **tail)
     if (*head == NULL)
     {
         printf("No songs in the playlist\n");
+        return;
     }
     else
     {
@@ -84,22 +91,26 @@ void deQueue(Node **head, Node **tail)
     }
 }
 
-void remainingTime(Node *head)
+void remainingTime(Node **head)
 {
     if (head == NULL)
     {
         printf("No songs in the playlist\n");
         return;
     }
-
+    Node *temp = *head;
     printf("Songs in the playlist:\n");
-    Node *current = head;
-    int sum = 0;
-    while (current != NULL)
+    while (temp != NULL)
     {
-        printf("%s by %s %dsec\n", current->songName, current->artist, current->time);
-        sum += current->time;
-        current = current->next;
+        printf("%s by %s %d\n", temp->songName, temp->artist, temp->time);
+        temp = temp->next;
     }
-    printf("Remaining Time: %dsec\n", sum);
+    temp = *head;
+    int sum = 0;
+    while (temp != NULL)
+    {
+        sum += temp->time;
+        temp = temp->next;
+    }
+    printf("Remaining Time: %d\n", sum);
 }
