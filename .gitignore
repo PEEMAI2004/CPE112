@@ -1,0 +1,10 @@
+.env
+.DS_Store
+.idea/
+.vscode/
+.Memory_/
+tempCodeRunnerFile.c
+
+*.exe
+*.o
+*.so
